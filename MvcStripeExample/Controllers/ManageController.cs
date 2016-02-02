@@ -109,6 +109,53 @@ namespace MvcStripeExample.Controllers
         }
 
         //
+        // GET: /Manage/EditProfile
+        public ActionResult EditProfile()
+        {
+            var user = UserManager.FindById(User.Identity.GetUserId());
+            var model = new EditProfileViewModel
+            {
+                PhoneNumber = user.PhoneNumber,
+                Address = user.Address,
+                Address2 = user.Address2,
+                City = user.City,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Zip = user.Zip,
+                State = user.State,
+            };
+
+            return View(model);
+        }
+
+        // 
+        // POST: /Manage/EditProfile
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditProfile(EditProfileViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var user = UserManager.FindById(User.Identity.GetUserId());
+
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.PhoneNumber = model.PhoneNumber;
+            user.Address = model.Address;
+            user.Address2 = model.Address2;
+            user.City = model.City;
+            user.State = model.State;
+            user.Zip = model.Zip;
+
+            UserManager.Update(user);
+
+            return RedirectToAction("Index");
+        }
+
+        //
         // GET: /Manage/AddPhoneNumber
         public ActionResult AddPhoneNumber()
         {

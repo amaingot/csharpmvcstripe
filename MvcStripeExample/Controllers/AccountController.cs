@@ -159,6 +159,7 @@ namespace MvcStripeExample.Controllers
                     LastName = model.LastName,
                     Address = model.Address,
                     Address2 = model.Address2,
+                    PhoneNumber = model.PhoneNumber,
                     City = model.City,
                     State = model.State,
                     Zip = model.Zip
