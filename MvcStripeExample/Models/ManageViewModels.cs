@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using MvcStripeExample.Misc;
 
 namespace MvcStripeExample.Models
 {
@@ -12,6 +13,15 @@ namespace MvcStripeExample.Models
         public string PhoneNumber { get; set; }
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
+
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string Address2 { get; set; }
+        public string City { get; set; }
+        public State State { get; set; }
+        public int Zip { get; set; }
+        public string Email { get; set; }
     }
 
     public class ManageLoginsViewModel
@@ -37,6 +47,38 @@ namespace MvcStripeExample.Models
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+    }
+
+    public class EditProfileViewModel
+    {
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        public string Address { get; set; }
+
+        [Display(Name = "Address (line 2)")]
+        public string Address2 { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public State State { get; set; }
+
+        [Required]
+        [DataType(DataType.PostalCode)]
+        public int Zip { get; set; }
     }
 
     public class ChangePasswordViewModel

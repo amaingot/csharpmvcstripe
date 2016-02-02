@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using MvcStripeExample.Misc;
 
 namespace MvcStripeExample.Models
 {
@@ -79,6 +80,35 @@ namespace MvcStripeExample.Models
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        [Required]
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        [Required]
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
+
+        [Required]
+        [Display(Name = "Phone Number")]
+        [DataType(DataType.PhoneNumber)]
+        public string PhoneNumber { get; set; }
+
+        [Required]
+        public string Address { get; set; }
+
+        [Display(Name = "Address (line 2)")]
+        public string Address2 { get; set; }
+
+        [Required]
+        public string City { get; set; }
+
+        [Required]
+        public State State { get; set; }
+
+        [Required]
+        [DataType(DataType.PostalCode)]
+        public int Zip { get; set; }
     }
 
     public class ResetPasswordViewModel

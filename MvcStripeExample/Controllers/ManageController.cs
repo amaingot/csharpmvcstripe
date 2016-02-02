@@ -64,13 +64,22 @@ namespace MvcStripeExample.Controllers
                 : "";
 
             var userId = User.Identity.GetUserId();
+            var user = UserManager.FindById(userId);
             var model = new IndexViewModel
             {
                 HasPassword = HasPassword(),
                 PhoneNumber = await UserManager.GetPhoneNumberAsync(userId),
                 TwoFactor = await UserManager.GetTwoFactorEnabledAsync(userId),
                 Logins = await UserManager.GetLoginsAsync(userId),
-                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId)
+                BrowserRemembered = await AuthenticationManager.TwoFactorBrowserRememberedAsync(userId),
+                Address = user.Address,
+                Address2 = user.Address2,
+                City = user.City,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Zip = user.Zip,
+                State = user.State,
+                Email = user.Email
             };
             return View(model);
         }
