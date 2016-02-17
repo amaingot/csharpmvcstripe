@@ -163,6 +163,16 @@ namespace MvcStripeExample.Misc
 
     }
 
+    public enum SubscriptionStatus
+    {
+        NotInitialized = 0,
+	    TrialWithoutCard = 1,
+	    Active = 2,
+        TrialExpired = -1,
+	    Suspended = -2,
+        Canceled = -3
+    }
+
     public static class EnumHelper
     {
         public static string GetStateName(State s)

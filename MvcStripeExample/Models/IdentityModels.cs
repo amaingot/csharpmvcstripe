@@ -29,6 +29,8 @@ namespace MvcStripeExample.Models
         [DataType(DataType.PostalCode)]
         public int Zip { get; set; }
 
+        public int SubscriptionId { get; set; }
+
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -50,5 +52,7 @@ namespace MvcStripeExample.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<MvcStripeExample.Models.Subscription> Subscriptions { get; set; }
     }
 }

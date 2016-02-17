@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
+using MvcStripeExample.Misc;
 using MvcStripeExample.Models;
 
 namespace MvcStripeExample.Controllers
@@ -168,6 +169,14 @@ namespace MvcStripeExample.Controllers
         {
             if (ModelState.IsValid)
             {
+                var subscription = new Subscription
+                {
+                    AdminEmail = model.Email,
+                    Status = SubscriptionStatus.NotInitialized
+                };
+
+                // TODO: insert subscription to database
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Email,
@@ -179,7 +188,8 @@ namespace MvcStripeExample.Controllers
                     PhoneNumber = model.PhoneNumber,
                     City = model.City,
                     State = model.State,
-                    Zip = model.Zip
+                    Zip = model.Zip,
+                    SubscriptionId = subscription.Id
                 };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
