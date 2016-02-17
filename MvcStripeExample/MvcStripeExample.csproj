@@ -209,6 +209,10 @@
     <Compile Include="Migrations\201602020209324_Initial.Designer.cs">
       <DependentUpon>201602020209324_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201602171749215_AddingSubscription.cs" />
+    <Compile Include="Migrations\201602171749215_AddingSubscription.Designer.cs">
+      <DependentUpon>201602171749215_AddingSubscription.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Misc\Enums.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -296,6 +300,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201602020209324_Initial.resx">
       <DependentUpon>201602020209324_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201602171749215_AddingSubscription.resx">
+      <DependentUpon>201602171749215_AddingSubscription.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
