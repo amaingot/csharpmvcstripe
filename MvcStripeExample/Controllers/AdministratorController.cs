@@ -386,12 +386,55 @@ namespace MvcStripeExample.Controllers
         }
 
         // GET: /Administrator/CustomerDetail/{id}
+        public ActionResult CustomerDetail(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var customerService = new StripeCustomerService();
+            var stripeCustomer = customerService.Get(id);
+            var applicationUser = UserManager.FindByEmail(stripeCustomer.Email);
+
+            var customer = new CustomerDetailViewModel
+            {
+                Id = stripeCustomer.Id,
+                Email = stripeCustomer.Email,
+                Description = stripeCustomer.Description,
+                FirstName = applicationUser.FirstName,
+                LastName = applicationUser.LastName,
+                PhoneNumber = applicationUser.PhoneNumber,
+                Address = applicationUser.Address,
+                Address2 = applicationUser.Address2,
+                City = applicationUser.City,
+                State = applicationUser.State,
+                Zip = applicationUser.Zip,
+                LiveMode = stripeCustomer.LiveMode,
+                Created = stripeCustomer.Created,
+                AccountBalance = stripeCustomer.AccountBalance,
+                Delinquent = stripeCustomer.Delinquent,
+                Deleted = stripeCustomer.Deleted,
+                Currency = stripeCustomer.Currency,
+                Object = stripeCustomer.Object,
+                Subscription = db.Subscriptions.Find(applicationUser.SubscriptionId),
+                StripeDiscount = stripeCustomer.StripeDiscount,
+                Metadata = stripeCustomer.Metadata,
+                Cards = stripeCustomer.SourceList.Data,
+                Subscriptions = stripeCustomer.StripeSubscriptionList.Data,
+                SubscriptionUsers = UserManager.Users.Where(u => 
+                                u.SubscriptionId == applicationUser.SubscriptionId 
+                                && u.Email != stripeCustomer.Email)
+            };
+            
+            return View(customer);
+        }
 
         // GET: /Administrator/EditCustomer/{id}
         // POST: /Administrator/EditCustomer/{id}
 
-        // GET: /Administrator/CustomerCoupon/{id}
-        // POST: /Administrator/CustomerCoupon/{id}
+        // GET: /Administrator/AddCustomerCoupon/{id}
+        // POST: /Administrator/AddCustomerCoupon/{id}
 
         // GET: /Administrator/CustomerPlan/{id}
         // POST: /Administrator/CustomerPlan/{id}

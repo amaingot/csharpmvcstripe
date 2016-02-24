@@ -259,6 +259,8 @@ namespace MvcStripeExample.Models
     {
         public string Object { get; set; }
 
+        public Subscription Subscription { get; set; }
+
         public StripeDiscount StripeDiscount { get; set; }
 
         public Dictionary<string, string> Metadata { get; set; }
@@ -266,6 +268,8 @@ namespace MvcStripeExample.Models
         public IEnumerable<StripeCard> Cards { get; set; }
 
         public IEnumerable<StripeSubscription> Subscriptions { get; set; }
+
+        public IEnumerable<ApplicationUser> SubscriptionUsers { get; set; } 
     }
     #endregion
 }
