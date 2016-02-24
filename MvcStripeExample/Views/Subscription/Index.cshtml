@@ -1,0 +1,58 @@
+﻿@model MvcStripeExample.Models.SubscriptionDetailsViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div>
+    <h4>Subscription Details</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.AdminEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdminEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SubscribedPlan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubscribedPlan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MonthlyPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MonthlyPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CardLastFour)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CardLastFour)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CardExpiration)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CardExpiration)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>
