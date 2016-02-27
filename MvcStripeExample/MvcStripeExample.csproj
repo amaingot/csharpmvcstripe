@@ -312,6 +312,9 @@
     <Content Include="Views\Administrator\ChargeDetail.cshtml" />
     <Content Include="Views\Administrator\Events.cshtml" />
     <Content Include="Views\Administrator\Customers.cshtml" />
+    <Content Include="Views\Administrator\EditCustomer.cshtml" />
+    <Content Include="Views\Administrator\ChangeCustomerEmail.cshtml" />
+    <Content Include="Views\Administrator\CustomerDetail.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

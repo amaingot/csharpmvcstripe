@@ -18,7 +18,19 @@ namespace MvcStripeExample.Models
 
         public int DisputedChargeCount { get; set; }
 
-        public int AccountBalance { get; set; }
+        public int AccountAvailableBalance { get; set; }
+
+        public int AccountPendingBalance { get; set; }
+
+        public int TrialCustomerCount { get; set; }
+
+        public int ActiveCustomerCount { get; set; }
+        
+        public int PastDueCustomerCount { get; set; }
+
+        public int CanceledCustomerCount { get; set; }
+
+        public int UnpaidCustomerCount { get; set; }
     }
 
     #region Plan Models
@@ -240,7 +252,7 @@ namespace MvcStripeExample.Models
         public int Zip { get; set; }
     }
 
-    public class CustomerListViewModel : CustomerCreateViewModel 
+    public class CustomerListViewModel : CustomerCreateViewModel
     {
         public bool LiveMode { get; set; }
 
@@ -270,6 +282,13 @@ namespace MvcStripeExample.Models
         public IEnumerable<StripeSubscription> Subscriptions { get; set; }
 
         public IEnumerable<ApplicationUser> SubscriptionUsers { get; set; } 
+    }
+
+    public class CustomerChangeEmailViewModel
+    {
+        public string Id { get; set; }
+        public string OldEmail { get; set; }
+        public string NewEmail { get; set; }
     }
     #endregion
 }

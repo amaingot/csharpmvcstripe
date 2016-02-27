@@ -42,7 +42,30 @@ namespace MvcStripeExample.Controllers
         // GET: Administrator
         public ActionResult Index()
         {
-            return View();
+            var customerService = new StripeCustomerService();
+            var customers = customerService.List();
+
+            var balanceService = new StripeBalanceService();
+            var balance = balanceService.Get();
+
+            var chargeService = new StripeChargeService();
+            var charges = chargeService.List().Where(c => c.Dispute != null);
+
+            var indexData = new AdministratorIndexViewModel
+            {
+                CustomerCount = customers.Count(),
+                AccountAvailableBalance = balance.Available.Sum(b => b.Amount),
+                AccountPendingBalance = balance.Pending.Sum(b => b.Amount),
+                MonthlyCustomerValue = customers.Sum(c => c.StripeSubscriptionList.Data.Sum(s => s.StripePlan.Amount)),
+                DisputedChargeCount = charges.Sum(c => c.Dispute.Amount.GetValueOrDefault()),
+                TrialCustomerCount = customers.Count(c => c.StripeSubscriptionList.Data.Any(s => s.Status.Equals("trialing"))),
+                ActiveCustomerCount = customers.Count(c => c.StripeSubscriptionList.Data.Any(s => s.Status.Equals("active"))),
+                PastDueCustomerCount = customers.Count(c => c.StripeSubscriptionList.Data.Any(s => s.Status.Equals("past_due"))),
+                CanceledCustomerCount = customers.Count(c => c.StripeSubscriptionList.Data.Any(s => s.Status.Equals("canceled"))),
+                UnpaidCustomerCount = customers.Count(c => c.StripeSubscriptionList.Data.Any(s => s.Status.Equals("unpaid"))),
+            };
+            
+            return View(indexData);
         }
 
         // GET: Administrator/Plans
@@ -431,7 +454,92 @@ namespace MvcStripeExample.Controllers
         }
 
         // GET: /Administrator/EditCustomer/{id}
+        public ActionResult EditCustomer(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var customerService = new StripeCustomerService();
+            var stripeCustomer = customerService.Get(id);
+            var applicationUser = UserManager.FindByEmail(stripeCustomer.Email);
+
+            var customer = new CustomerCreateViewModel
+            {
+                Id = stripeCustomer.Id,
+                Email = stripeCustomer.Email,
+                Description = stripeCustomer.Description,
+                FirstName = applicationUser.FirstName,
+                LastName = applicationUser.LastName,
+                PhoneNumber = applicationUser.PhoneNumber,
+                Address = applicationUser.Address,
+                Address2 = applicationUser.Address2,
+                City = applicationUser.City,
+                State = applicationUser.State,
+                Zip = applicationUser.Zip
+            };
+
+            return View(customer);
+        }
+
         // POST: /Administrator/EditCustomer/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditCustomer(CustomerCreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var customerService = new StripeCustomerService();
+            var stripeCustomer = customerService.Get(model.Id);
+            var applicationUser = UserManager.FindByEmail(stripeCustomer.Email);
+            
+            var updateOptions = new StripeCustomerUpdateOptions
+            {
+                Description = model.Description
+            };
+
+            customerService.Update(model.Id, updateOptions);
+
+            applicationUser.FirstName = model.FirstName;
+            applicationUser.LastName = model.LastName;
+            applicationUser.PhoneNumber = model.PhoneNumber;
+            applicationUser.Address = model.Address;
+            applicationUser.Address2 = model.Address2;
+            applicationUser.City = model.City;
+            applicationUser.State = model.State;
+            applicationUser.Zip = model.Zip;
+
+            UserManager.Update(applicationUser);
+
+
+            return RedirectToAction("CustomerDetail", new { id = model.Id });
+        }
+
+        // GET: /Administrator/ChangeCustomerEmail/{id}
+        public ActionResult ChangeCustomerEmail(string id)
+        {
+            if (string.IsNullOrEmpty(id))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var customerService = new StripeCustomerService();
+            var stripeCustomer = customerService.Get(id);
+
+            var model = new CustomerChangeEmailViewModel
+            {
+                Id = id,
+                OldEmail = stripeCustomer.Email,
+                NewEmail = ""
+            };
+            return View();
+        }
+
+        // POST: /Administrator/ChangeCustomerEmail/{id}
 
         // GET: /Administrator/AddCustomerCoupon/{id}
         // POST: /Administrator/AddCustomerCoupon/{id}
