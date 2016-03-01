@@ -1,4 +1,6 @@
-﻿@model MvcStripeExample.Models.ManageLoginsViewModel
+﻿
+@using Microsoft.Owin.Security
+@model MvcStripeExample.Models.ManageLoginsViewModel
 @{
     ViewBag.Title = "Manage your external logins";
 }
@@ -7,7 +9,7 @@
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 @{
-    var loginProviders = System.Runtime.Remoting.Contexts.Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
     if (loginProviders.Count() == 0) {
         <div>
             <p>
