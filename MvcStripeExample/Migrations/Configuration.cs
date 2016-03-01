@@ -1,3 +1,5 @@
+using MvcStripeExample.Misc;
+
 namespace MvcStripeExample.Migrations
 {
     using System;
@@ -26,12 +28,23 @@ namespace MvcStripeExample.Migrations
             IdentityResult ir;
 
             var rm = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));
-            ir = rm.Create(new IdentityRole("admin"));
+            rm.Create(new IdentityRole("admin"));
 
             var um = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
             var user = new ApplicationUser()
             {
-                UserName = "admin",
+                UserName = "admin@esyncsolutions.net",
+                Email = "admin@esyncsolutions.net",
+                EmailConfirmed = true,
+                FirstName = "Admin",
+                LastName = "SuperUser",
+                Address = "One Boss Rd",
+                Address2 = "Suite One",
+                City = "Bossville",
+                Zip = 10001,
+                State = State.DC,
+                PhoneNumber = "800-100-9999",
+                PhoneNumberConfirmed = true
             };
 
             ir = um.Create(user, "%&T6D7nT23Ph");

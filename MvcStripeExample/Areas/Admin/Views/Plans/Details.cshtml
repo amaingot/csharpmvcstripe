@@ -1,0 +1,98 @@
+﻿@model MvcStripeExample.Areas.Admin.Models.PlanDetailViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>PlanDetailViewModel</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Amount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Currency)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Currency)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Interval)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Interval)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IntervalCount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IntervalCount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LiveMode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LiveMode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TrialPeriodDays)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TrialPeriodDays)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.StatementDescriptor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StatementDescriptor)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MvcStripeExample.Areas.Admin.Models.CouponListViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.PercentOff)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Currency)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AmountOff)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Duration)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MaxRedemptions)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RedeemBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DurationInMonths)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TimesRedeemed)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PercentOff)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Currency)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountOff)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Duration)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MaxRedemptions)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RedeemBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DurationInMonths)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TimesRedeemed)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

@@ -26,6 +26,34 @@ namespace MvcStripeExample
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            // Scripts and Styles for Admin area
+
+            bundles.Add(new StyleBundle("~/Content/metisMenu").Include(
+                "~/Content/sb-admin/bower_components/metisMenu/dist/metisMenu.min.css"));
+
+            bundles.Add(new StyleBundle("~/Content/timeline").Include(
+                "~/Content/sb-admin/dist/css/timeline.css"));
+
+            bundles.Add(new StyleBundle("~/Content/admincss").Include(
+                "~/Content/sb-admin/dist/css/sb-admin-2.css"));
+
+            bundles.Add(new StyleBundle("~/Content/morris").Include(
+                "~/Content/sb-admin/bower_components/morrisjs/morris.css"));
+
+            bundles.Add(new StyleBundle("~/Content/font-awesome").Include(
+                "~/Content/sb-admin/bower_components/font-awesome/css/font-awesome.min.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/sb-admin").Include(
+                      "~/Scripts/sb-admin/dist/js/sb-admin-2.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/metisMenu").Include(
+                      "~/Scripts/sb-admin/bower_components/metisMenu/dist/metisMenu.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/morris").Include(
+                      "~/Scripts/sb-admin/bower_components/raphael/raphael-min.js",
+                      "~/Scripts/sb-admin/bower_components/morrisjs/morris.min.js",
+                      "~/Scripts/sb-admin/js/morris-data.js"));
         }
     }
 }
