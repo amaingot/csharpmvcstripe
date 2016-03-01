@@ -14,7 +14,7 @@ namespace MvcStripeExample
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
-            routes.Add(new SubdomainRoute());
+            //routes.Add(new SubdomainRoute());
 
             routes.MapRoute(
                 name: "Default",
